@@ -1,0 +1,60 @@
+div.mb-10[data-controller="people"]
+  = form_with(model: person, class: "contents", html: {novalidate: true}) do |form|
+    .my-5
+      = form.label :first_name
+      label.text-red-500 = '*'
+      = form.text_field :first_name,
+              data: { action: "people#validate_name", max_length: 25, error_div: 'error_first_name'},
+              class: "block shadow rounded-md border #{ person.errors.include?(:first_name) ? 'border-red-200' : 'border-gray-200'} outline-none px-3 py-2 mt-2 w-full",
+              required: true
+      #error_first_name.text-red-500.px-3.py-2.font-medium.rounded-lg
+        = person.errors[:first_name].first if person.errors.include? :first_name
+    .my-5
+      = form.label :last_name
+      label.text-red-500 = '*'
+      = form.text_field :last_name,
+              data: { action: "people#validate_name", max_length: 50, error_div: 'error_last_name'},
+              class: "block shadow rounded-md border #{ person.errors.include?(:last_name) ? 'border-red-200' : 'border-gray-200'} outline-none px-3 py-2 mt-2 w-full",
+              required: true
+      #error_last_name.text-red-500.px-3.py-2.font-medium.rounded-lg
+        = person.errors[:last_name].first if person.errors.include? :last_name
+    .my-5
+      = form.label :nickname
+      = form.text_field :nickname, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full"
+    .my-5
+      = form.label :email
+      label.text-red-500 = '*'
+      = form.text_field :email,
+              data: { action: "people#validate_email", error_div: 'error_email'},
+              class: "block shadow rounded-md border #{ person.errors.include?(:email) ? 'border-red-200' : 'border-gray-200'} outline-none px-3 py-2 mt-2 w-full",
+              required: true
+      #error_email.text-red-500.px-3.py-2.font-medium.rounded-lg
+        = person.errors[:email].first if person.errors.include? :email
+    .my-5
+      = form.label :phone
+      label.text-red-500 = '*'
+      = form.telephone_field :phone,
+              data: { action: "people#validate_phone", error_div: 'error_phone'},
+              class: "block shadow rounded-md border #{ person.errors.include?(:phone) ? 'border-red-200' : 'border-gray-200'} outline-none px-3 py-2 mt-2 w-full",
+              required: true
+      #error_phone.text-red-500.px-3.py-2.font-medium.rounded-lg
+        = person.errors[:phone].first if person.errors.include? :phone
+    .my-5.float-left
+      = form.label :street
+      = form.text_field :street, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2"
+    .my-5.float-left
+      = form.label :city
+      = form.text_field :city, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2"
+    .my-5.float-left
+      = form.label :state
+      = form.text_field :state, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2"
+    .my-5.float-left
+      = form.label :zip
+      = form.number_field :zip, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2"
+    #employments.clear-both
+      = form.fields_for :employments do |employment_fields|
+        = render "employment_fields", form: employment_fields
+    = link_to_add_fields "Add Employment", form, :employments
+    .div.clear-both
+      = form.submit value: "Save", class: "rounded-lg py-3 px-5 bg-gray-400 text-white inline-block font-medium cursor-pointer", disabled: true
+      = link_to 'Cancel', root_url, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"

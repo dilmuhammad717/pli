@@ -1,0 +1,31 @@
+| <tr id="
+= dom_id person
+| " class=" border-b
+= @people.index(person) % 2 == 0 ? ' bg-white' : ' bg-gray-100'
+| ">
+td.px-6.py-4.text-sm.font-medium.text-gray-900
+  = person&.personal_info['name'] rescue nil
+/ td.text-sm.text-gray-900.font-light.px-6.py-4
+  = person&.personal_info['nickname'] rescue nil
+td.text-sm.text-gray-900.font-light.px-6.py-4
+  = person.email
+td.text-sm.text-gray-900.font-light.px-6.py-4.whitespace-nowrap
+  = person&.personal_info['phone'] rescue nil
+td.text-sm.text-gray-900.font-light.px-6.py-4.max-w-xs
+  = normalize_address(person.address) rescue nil
+- unless person.employments.empty?
+  td.text-sm.text-gray-900.font-light.px-2
+    table.min-w-full.border-l.border-r
+      thead.bg-green-100.border-b
+        tr
+          th.text-sm.font-medium.text-gray-900[scope="col"]
+            |  Employer
+          th.text-sm.font-medium.text-gray-900[scope="col"]
+            |  Date Started
+          th.text-sm.font-medium.text-gray-900[scope="col"]
+            |  Date Ended
+      tbody
+        = render "employments_display", employments: person.employments
+- else
+  td.text-sm.text-gray-900.font-light.px-6.py-4.whitespace-nowrap
+    | No data available

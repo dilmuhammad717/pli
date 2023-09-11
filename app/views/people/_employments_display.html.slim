@@ -1,0 +1,8 @@
+- employments.each do |employment|
+  tr.border-b
+    td.text-sm.text-gray-900.font-light.px-1.py-1
+      = employment.employer
+    td.text-sm.text-gray-900.font-light.px-1.py-1
+      = employment.date_started.strftime("%m/%d/%Y")
+    td.text-sm.text-gray-900.font-light.px-1.py-1
+      = employment.date_ended.strftime("%m/%d/%Y")

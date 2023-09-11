@@ -1,0 +1,31 @@
+= turbo_frame_tag "person", class: "mx-auto w-full" do
+  .w-full
+    - if notice.present?
+      p#notice.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-lg.inline-block
+        = notice
+    .flex.justify-evenly.items-center
+      = link_to 'Personal Data', new_person_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium"
+      button.px-8.py-3.text-white.bg-blue-600.rounded.focus:outline-none.disabled:opacity-25[type="button" disabled]
+        | Employment
+    #people.min-w-full.mt-6
+      .flex.flex-col
+        .overflow-x-auto.sm:mx-6.lg:mx-8
+          .py-2.inline-block.min-w-full.sm:px-6.lg:px-8
+            .overflow-hidden
+              table.min-w-full
+                thead.bg-blue-300.border-b
+                  tr
+                    th.text-sm.font-medium.text-gray-900.px-6.py-4.text-left[scope="col"]
+                      |  Name
+                    / th.text-sm.font-medium.text-gray-900.px-6.py-4.text-left[scope="col"]
+                      |  Nickname
+                    th.text-sm.font-medium.text-gray-900.px-6.py-4.text-left[scope="col"]
+                      |  Email
+                    th.text-sm.font-medium.text-gray-900.px-6.py-4.text-left[scope="col"]
+                      |  Phone
+                    th.text-sm.font-medium.text-gray-900.px-6.py-4.text-left[scope="col"]
+                      |  Address
+                    th.text-sm.font-medium.text-gray-900.px-6.py-4.text-left[scope="col"]
+                      |  Employment History
+                tbody
+                = render @people

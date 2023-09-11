@@ -1,0 +1,27 @@
+.my-5
+  = form.label :employer
+  label.text-red-500 = '*'
+  = form.text_field :employer,
+          class: "block shadow rounded-md border #{ form.object.errors.include?(:employer) ? 'border-red-200' : 'border-gray-200'} outline-none px-3 py-2 mt-2 w-full",
+          required: true,
+          data: {action: 'people#validate_field'}
+  .text-red-500.px-3.py-2.font-medium.rounded-lg.error
+    = form.object.errors[:employer].first if form.object.errors.include? :employer
+.my-5
+  = form.label :date_started
+  label.text-red-500 = '*'
+  = form.date_field :date_started,
+          class: "block shadow rounded-md border #{ form.object.errors.include?(:date_started) ? 'border-red-200' : 'border-gray-200'} outline-none px-3 py-2 mt-2 w-full",
+          required: true,
+          data: {action: 'people#validate_field'}
+  .text-red-500.px-3.py-2.font-medium.rounded-lg.error
+    = form.object.errors[:date_started].first if form.object.errors.include? :date_started
+.my-5
+  = form.label :date_ended
+  label.text-red-500 = '*'
+  = form.date_field :date_ended,
+          class: "block shadow rounded-md border #{ form.object.errors.include?(:date_ended) ? 'border-red-200' : 'border-gray-200'} outline-none px-3 py-2 mt-2 w-full",
+          required: true,
+          data: {action: 'people#validate_field'}
+  .text-red-500.px-3.py-2.font-medium.rounded-lg.error
+    = form.object.errors[:date_ended].first if form.object.errors.include? :date_ended
